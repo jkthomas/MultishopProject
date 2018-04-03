@@ -49,9 +49,8 @@ namespace Multishop.Web.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -62,13 +61,16 @@ namespace Multishop.Web.Models
         public bool RememberMe { get; set; }
     }
 
-    //TODO: Add UserRole as field in RegisterViewModel
     public class RegisterViewModel
     {
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -80,9 +82,6 @@ namespace Multishop.Web.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
-        //[Display(Name = "User role")]
-        //public string UserRole { get; set; }
     }
 
     public class ResetPasswordViewModel
