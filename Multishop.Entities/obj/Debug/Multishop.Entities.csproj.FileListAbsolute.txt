@@ -1,0 +1,16 @@
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Entities\bin\Debug\Multishop.Entities.dll.config
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Entities\bin\Debug\Multishop.Entities.dll
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Entities\bin\Debug\Multishop.Entities.pdb
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Entities\bin\Debug\EntityFramework.dll
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Entities\bin\Debug\EntityFramework.SqlServer.dll
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Entities\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Entities\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Entities\bin\Debug\EntityFramework.xml
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Entities\bin\Debug\EntityFramework.SqlServer.xml
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Entities\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Entities\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Entities\obj\Debug\Multishop.Entities.csproj.CoreCompileInputs.cache
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Entities\obj\Debug\Multishop.Entities.csproj.CopyComplete
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Entities\obj\Debug\Multishop.Entities.dll
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Entities\obj\Debug\Multishop.Entities.pdb
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Entities\obj\Debug\Multishop.Entities.csprojResolveAssemblyReference.cache
