@@ -19,7 +19,13 @@ namespace Multishop.Web.Controllers
         // GET: Product
         public ActionResult Index()
         {
-            return View(db.Products.ToList());
+            ProductIndexViewModel productIndexViewModel = new ProductIndexViewModel()
+            {
+                Products = db.Products.ToList(),
+                IsAdmin = User.IsInRole("Admin")
+            };
+
+            return View(productIndexViewModel);
         }
 
         // GET: Product/Details/5
