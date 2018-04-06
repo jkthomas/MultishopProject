@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Multishop.Data.DAL.Context;
 using Multishop.Entities.ShopEntities;
+using Multishop.Web.Models.CartViewModels;
 
 namespace Multishop.Web.Controllers
 {
@@ -41,24 +42,29 @@ namespace Multishop.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-            return View();
+            ProductViewModel model = new ProductViewModel()
+            {
+                Categories = db.Categories.ToList()
+            };
+            return View(model);
         }
 
         // POST: Product/Create
-        // TODO: Pick category instead of creating new entity
+        // TODO: Bind include only required Product entity properties
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public ActionResult Create([Bind(Include = "ProductId,Name,UnitPrice,Category,Description")] Product product)
+        public ActionResult Create(/*[Bind(Include = "ProductId,Name,UnitPrice,Category,Description")]*/ ProductViewModel productViewModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.Products.Add(product);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                productViewModel.Categories = db.Categories.ToList();
+                return View(productViewModel);
             }
-
-            return View(product);
+            productViewModel.Product.Category = db.Categories.Where(c => c.CategoryId == productViewModel.CategoryId).FirstOrDefault();
+            db.Products.Add(productViewModel.Product);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Product/Edit/5
