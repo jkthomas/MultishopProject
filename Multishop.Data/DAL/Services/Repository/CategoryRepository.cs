@@ -8,34 +8,34 @@ using System.Threading.Tasks;
 
 namespace Multishop.Data.DAL.Services.Repository
 {
-    public class ProductRepository : IRepository<Product>
+    public class CategoryRepository : IRepository<Category>
     {
         private ApplicationDbContext _dbContext;
 
-        public ProductRepository(ApplicationDbContext dbContext)
+        public CategoryRepository(ApplicationDbContext dbContext)
         {
             this._dbContext = dbContext;
         }
 
-        public void Delete(int productId)
+        public void Delete(int categoryId)
         {
-            Product product = _dbContext.Products.Find(productId);
-            _dbContext.Products.Remove(product);
+            Category category = _dbContext.Categories.Find(categoryId);
+            _dbContext.Categories.Remove(category);
         }
 
-        public Product GetDetails(int? productId)
+        public Category GetDetails(int? categoryId)
         {
-            return _dbContext.Products.Find(productId);
+            return _dbContext.Categories.Find(categoryId);
         }
 
-        public IEnumerable<Product> GetEntities()
+        public IEnumerable<Category> GetEntities()
         {
-            return _dbContext.Products.ToList();
+            return _dbContext.Categories.ToList();
         }
 
-        public void Insert(Product product)
+        public void Insert(Category category)
         {
-            _dbContext.Products.Add(product);
+            _dbContext.Categories.Add(category);
         }
 
         public void Save()
@@ -43,9 +43,9 @@ namespace Multishop.Data.DAL.Services.Repository
             _dbContext.SaveChanges();
         }
 
-        public void Update(Product product)
+        public void Update(Category category)
         {
-            _dbContext.Entry(product).State = System.Data.Entity.EntityState.Modified;
+            _dbContext.Entry(category).State = System.Data.Entity.EntityState.Modified;
         }
 
         #region IDisposable Support
@@ -70,4 +70,5 @@ namespace Multishop.Data.DAL.Services.Repository
         }
         #endregion
     }
+
 }

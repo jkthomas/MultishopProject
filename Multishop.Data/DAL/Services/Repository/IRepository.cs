@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Multishop.Data.DAL.Services.Repository
 {
-    interface IRepository<T> : IDisposable where T : class
+    public interface IRepository<T> : IDisposable where T : class
     {
         IEnumerable<T> GetEntities();
-        T GetDetails(int entityId);
+        T GetDetails(int? entityId);
         void Insert(T entity);
         void Delete(int entityId);
         void Update(T entity);

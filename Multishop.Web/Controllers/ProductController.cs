@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Multishop.Data.DAL.Context;
+using Multishop.Data.DAL.Services.Repository;
 using Multishop.Entities.ShopEntities;
 using Multishop.Web.Models.CartViewModels;
 
@@ -14,14 +15,21 @@ namespace Multishop.Web.Controllers
 {
     public class ProductController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IRepository<Product> productRepository;
+        private IRepository<Category> categoryRepository;
+
+        public ProductController()
+        {
+            this.productRepository = new ProductRepository(new ApplicationDbContext());
+            this.categoryRepository = new CategoryRepository(new ApplicationDbContext());
+        }
 
         // GET: Product
         public ActionResult Index()
         {
             ProductIndexViewModel productIndexViewModel = new ProductIndexViewModel()
             {
-                Products = db.Products.ToList(),
+                Products = productRepository.GetEntities(),
                 IsAdmin = User.IsInRole("Admin")
             };
 
@@ -36,7 +44,7 @@ namespace Multishop.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Product product = productRepository.GetDetails(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -45,18 +53,20 @@ namespace Multishop.Web.Controllers
         }
 
         // GET: Product/Create
+        //TODO: Add categories to product repository
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ProductViewModel model = new ProductViewModel()
             {
-                Categories = db.Categories.ToList()
+                Categories = categoryRepository.GetEntities().ToList()
             };
             return View(model);
         }
 
         // POST: Product/Create
         // TODO: Bind include only required Product entity properties
+        //TODO: Add categories to product repository
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -64,12 +74,12 @@ namespace Multishop.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                productViewModel.Categories = db.Categories.ToList();
+                productViewModel.Categories = categoryRepository.GetEntities().ToList();
                 return View(productViewModel);
             }
-            productViewModel.Product.Category = db.Categories.Where(c => c.CategoryId == productViewModel.CategoryId).FirstOrDefault();
-            db.Products.Add(productViewModel.Product);
-            db.SaveChanges();
+            productViewModel.Product.Category = categoryRepository.GetEntities().Where(c => c.CategoryId == productViewModel.CategoryId).FirstOrDefault();
+            productRepository.Insert(productViewModel.Product);
+            productRepository.Save();
             return RedirectToAction("Index");
         }
 
@@ -81,7 +91,7 @@ namespace Multishop.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Product product = productRepository.GetDetails(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -99,8 +109,8 @@ namespace Multishop.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
+                productRepository.Update(product);
+                productRepository.Save();
                 return RedirectToAction("Index");
             }
             return View(product);
@@ -114,7 +124,7 @@ namespace Multishop.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Product product = productRepository.GetDetails(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -128,9 +138,9 @@ namespace Multishop.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
-            db.SaveChanges();
+            Product product = productRepository.GetDetails(id);
+            productRepository.Delete(id);
+            productRepository.Save();
             return RedirectToAction("Index");
         }
 
@@ -138,7 +148,7 @@ namespace Multishop.Web.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                productRepository.Dispose();
             }
             base.Dispose(disposing);
         }
