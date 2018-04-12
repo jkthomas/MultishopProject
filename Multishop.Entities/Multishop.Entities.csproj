@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accounts\ApplicationUser.cs" />
+    <Compile Include="Accounts\Inventory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShopEntities\Cart.cs" />
     <Compile Include="ShopEntities\Category.cs" />

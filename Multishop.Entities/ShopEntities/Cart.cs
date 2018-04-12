@@ -11,8 +11,6 @@ namespace Multishop.Entities.ShopEntities
 {
     public class Cart
     {
-
-        //public int CartId { get; set; }
         [ForeignKey("User")]
         public string CartId { get; set; }
 

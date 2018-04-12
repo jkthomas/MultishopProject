@@ -14,6 +14,9 @@ namespace Multishop.Entities.Accounts
     public class ApplicationUser : IdentityUser
     {
         public virtual Cart Cart { get; set; }
+        public virtual Inventory Inventory { get; set; }
+        public decimal Balance { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

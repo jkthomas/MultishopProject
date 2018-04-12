@@ -28,35 +28,20 @@ namespace Multishop.Web
             // In Startup iam creating first Admin Role and creating a default Admin User    
             if (!roleManager.RoleExists("Admin"))
             { 
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+                var role = new IdentityRole
                 {
                     Name = "Admin"
                 };
-                roleManager.Create(role);               
-
-                /*var user = new ApplicationUser
-                {
-                    UserName = "admin",
-                    Email = "admin@admin.com"
-                };
-                string userPWD = "Test12#";
-
-                var chkUser = UserManager.Create(user, userPWD); 
-                if (chkUser.Succeeded)
-                {
-                    var result1 = UserManager.AddToRole(user.Id, "Admin");
-
-                }*/
+                roleManager.Create(role);
             }
   
             if (!roleManager.RoleExists("Guest"))
             {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+                var role = new IdentityRole
                 {
                     Name = "Guest"
                 };
                 roleManager.Create(role);
-
             }
         }
     }

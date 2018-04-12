@@ -53,7 +53,6 @@ namespace Multishop.Web.Controllers
         }
 
         // GET: Product/Create
-        //TODO: Add categories to product repository
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
@@ -66,7 +65,6 @@ namespace Multishop.Web.Controllers
 
         // POST: Product/Create
         // TODO: Bind include only required Product entity properties
-        //TODO: Add categories to product repository
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -80,6 +78,7 @@ namespace Multishop.Web.Controllers
             productViewModel.Product.Category = categoryRepository.GetEntities().Where(c => c.CategoryId == productViewModel.CategoryId).FirstOrDefault();
             productRepository.Insert(productViewModel.Product);
             productRepository.Save();
+
             return RedirectToAction("Index");
         }
 
@@ -111,6 +110,7 @@ namespace Multishop.Web.Controllers
             {
                 productRepository.Update(product);
                 productRepository.Save();
+
                 return RedirectToAction("Index");
             }
             return View(product);
@@ -141,6 +141,7 @@ namespace Multishop.Web.Controllers
             Product product = productRepository.GetDetails(id);
             productRepository.Delete(id);
             productRepository.Save();
+
             return RedirectToAction("Index");
         }
 
