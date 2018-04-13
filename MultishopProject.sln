@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multishop.Data", "Multishop
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multishop.Entities", "Multishop.Entities\Multishop.Entities.csproj", "{3F42E116-C337-44A4-90C5-4CBC8F7FFDDB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multishop.Service", "Multishop.Service\Multishop.Service.csproj", "{145A3522-234F-47AE-9B1B-8CDD2E36BC42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3F42E116-C337-44A4-90C5-4CBC8F7FFDDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F42E116-C337-44A4-90C5-4CBC8F7FFDDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F42E116-C337-44A4-90C5-4CBC8F7FFDDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{145A3522-234F-47AE-9B1B-8CDD2E36BC42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{145A3522-234F-47AE-9B1B-8CDD2E36BC42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{145A3522-234F-47AE-9B1B-8CDD2E36BC42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{145A3522-234F-47AE-9B1B-8CDD2E36BC42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

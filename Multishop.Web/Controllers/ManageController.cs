@@ -71,8 +71,9 @@ namespace Multishop.Web.Controllers
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
-                UserRoles = await UserManager.GetRolesAsync(userId)
-            };
+                UserRoles = await UserManager.GetRolesAsync(userId),
+                Balance = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(userId).Balance
+        };
             return View(model);
         }
 

@@ -13,6 +13,7 @@ namespace Multishop.Web.Models
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
         public IList<string> UserRoles { get; set; }
+        public decimal Balance { get; set; }
     }
 
     public class ManageLoginsViewModel
