@@ -44,6 +44,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
+            <td>
+                @Html.ActionLink("Buy", "Buy", new { id = item.ProductId })
+            </td>
             @if (Model.IsAdmin)
             {
                 <td>

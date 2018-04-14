@@ -145,6 +145,21 @@ namespace Multishop.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        //TODO: Implement this
+        // GET: Product/Buy/5
+        /*[Authorize]
+        public ActionResult Buy(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = productRepository.GetDetails(id);
+
+
+            return 1;
+        }*/
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

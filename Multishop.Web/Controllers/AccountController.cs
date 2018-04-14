@@ -8,7 +8,10 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Multishop.Data.DAL.Context;
+using Multishop.Data.DAL.Services.Repository;
 using Multishop.Entities.Accounts;
+using Multishop.Entities.ShopEntities;
 using Multishop.Web.Models;
 
 namespace Multishop.Web.Controllers
@@ -16,6 +19,8 @@ namespace Multishop.Web.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private CartRepository _cartRepository;
+        private InventoryRepository _inventoryRepository;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -153,17 +158,33 @@ namespace Multishop.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, Balance = 100 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    await UserManager.AddToRoleAsync(user.Id, "Guest");
+                    await UserManager.AddToRoleAsync(user.Id, "Admin");
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    _cartRepository = new CartRepository(new ApplicationDbContext());
+                    _inventoryRepository = new InventoryRepository(new ApplicationDbContext());
+
+                    Cart cart = new Cart()
+                    {
+                        User = user
+                    };
+                    _cartRepository.Insert(cart);
+                    _cartRepository.Save();
+
+                    Inventory inventory = new Inventory()
+                    {
+                        User = user
+                    };
+                    _inventoryRepository.Insert(inventory);
+                    _inventoryRepository.Save();
 
                     return RedirectToAction("Index", "Home");
                 }
