@@ -13,7 +13,6 @@ namespace Multishop.Entities.ShopEntities
     {
         [ForeignKey("User")]
         public string CartId { get; set; }
-
         
         public virtual ApplicationUser User { get; set; }
         public ICollection<OrderProduct> OrderProducts { get; set; }

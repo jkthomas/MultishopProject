@@ -163,25 +163,27 @@ namespace Multishop.Web.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    await UserManager.AddToRoleAsync(user.Id, "Admin");
+                    await UserManager.AddToRoleAsync(user.Id, "Guest");
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
                     _cartRepository = new CartRepository(new ApplicationDbContext());
                     _inventoryRepository = new InventoryRepository(new ApplicationDbContext());
 
+                    //TODO: Settle 1:1 relations between user-cart and user-inventory
                     Cart cart = new Cart()
                     {
-                        User = user
+                        CartId = user.Id
                     };
                     _cartRepository.Insert(cart);
                     _cartRepository.Save();
 
                     Inventory inventory = new Inventory()
                     {
-                        User = user
+                        InventoryId = user.Id
                     };
                     _inventoryRepository.Insert(inventory);
                     _inventoryRepository.Save();

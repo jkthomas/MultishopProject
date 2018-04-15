@@ -10,7 +10,6 @@ namespace Multishop.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            ContextKey = "Multishop.Data.DAL.Context.ApplicationDbContext";
         }
 
         protected override void Seed(Multishop.Data.DAL.Context.ApplicationDbContext context)

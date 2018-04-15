@@ -1,0 +1,6 @@
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Service\bin\Debug\Multishop.Service.dll
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Service\bin\Debug\Multishop.Service.pdb
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Service\obj\Debug\Multishop.Service.csprojResolveAssemblyReference.cache
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Service\obj\Debug\Multishop.Service.csproj.CoreCompileInputs.cache
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Service\obj\Debug\Multishop.Service.dll
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Service\obj\Debug\Multishop.Service.pdb
