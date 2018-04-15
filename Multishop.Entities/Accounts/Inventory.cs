@@ -15,6 +15,6 @@ namespace Multishop.Entities.Accounts
         public string InventoryId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
-        public ICollection<Product> Products { get; set; }
+        public ICollection<StoredProduct> StoredProducts { get; set; }
     }
 }

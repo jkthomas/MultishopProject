@@ -3,6 +3,10 @@
 @{
     ViewBag.Title = "Index";
 }
+@if (TempData["Success"] != null)
+{
+    <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
+}
 
 <h2>Index</h2>
 @if (Model.IsAdmin)

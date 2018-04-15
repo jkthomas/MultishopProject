@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Multishop.Data.DAL.Context;
 using Multishop.Data.DAL.Services.Repository;
 using Multishop.Entities.ShopEntities;
@@ -17,6 +19,7 @@ namespace Multishop.Web.Controllers
     {
         private IRepository<Product> productRepository;
         private IRepository<Category> categoryRepository;
+        private IRepository<OrderProduct> orderProductRepository;
 
         public ProductController()
         {
@@ -30,7 +33,7 @@ namespace Multishop.Web.Controllers
             ProductIndexViewModel productIndexViewModel = new ProductIndexViewModel()
             {
                 Products = productRepository.GetEntities(),
-                IsAdmin = User.IsInRole("Admin")
+                IsAdmin = User.IsInRole("Admin") //bool: IsAdmin = false if current user is not an Admin
             };
 
             return View(productIndexViewModel);
@@ -76,7 +79,14 @@ namespace Multishop.Web.Controllers
                 return View(productViewModel);
             }
             productViewModel.Product.Category = categoryRepository.GetEntities().Where(c => c.CategoryId == productViewModel.CategoryId).FirstOrDefault();
-            productRepository.Insert(productViewModel.Product);
+            Product product = new Product()
+            {
+                CategoryId = productViewModel.Product.Category.CategoryId,
+                Name = productViewModel.Product.Name,
+                UnitPrice = productViewModel.Product.UnitPrice,
+                Description = productViewModel.Product.Description
+            };
+            productRepository.Insert(product);
             productRepository.Save();
 
             return RedirectToAction("Index");
@@ -147,18 +157,29 @@ namespace Multishop.Web.Controllers
 
         //TODO: Implement this
         // GET: Product/Buy/5
-        /*[Authorize]
+        [Authorize]
         public ActionResult Buy(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            this.orderProductRepository = new OrderProductRepository(new ApplicationDbContext());
+            var user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
             Product product = productRepository.GetDetails(id);
+            OrderProduct orderProduct = new OrderProduct()
+            {
+                CartId = user.Cart.CartId,
+                ProductId = product.ProductId,
+                Quantity = 1
+            };
+            orderProductRepository.Insert(orderProduct);
+            orderProductRepository.Save();
 
-
-            return 1;
-        }*/
+            TempData["Success"] = "Added Successfully!";
+            return RedirectToAction("Index");
+        }
 
         protected override void Dispose(bool disposing)
         {

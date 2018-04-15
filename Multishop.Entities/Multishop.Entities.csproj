@@ -60,6 +60,7 @@
     <Compile Include="ShopEntities\Category.cs" />
     <Compile Include="ShopEntities\OrderProduct.cs" />
     <Compile Include="ShopEntities\Product.cs" />
+    <Compile Include="Accounts\StoredProduct.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -19,8 +19,8 @@ namespace Multishop.Web.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private CartRepository _cartRepository;
-        private InventoryRepository _inventoryRepository;
+        private IRepository<Cart> _cartRepository;
+        private IRepository<Inventory> _inventoryRepository;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -170,8 +170,8 @@ namespace Multishop.Web.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    _cartRepository = new CartRepository(new ApplicationDbContext());
-                    _inventoryRepository = new InventoryRepository(new ApplicationDbContext());
+                    this._cartRepository = new CartRepository(new ApplicationDbContext());
+                    this._inventoryRepository = new InventoryRepository(new ApplicationDbContext());
 
                     //TODO: Settle 1:1 relations between user-cart and user-inventory
                     Cart cart = new Cart()
