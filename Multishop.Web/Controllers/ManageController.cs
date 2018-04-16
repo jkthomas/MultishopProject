@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -6,6 +7,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Multishop.Data.DAL.Services.Repository;
+using Multishop.Entities.Accounts;
+using Multishop.Entities.ShopEntities;
 using Multishop.Web.Models;
 
 namespace Multishop.Web.Controllers
@@ -15,6 +19,8 @@ namespace Multishop.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IManagementRepository<Cart> _cartRepository;
+        private IManagementRepository<Inventory> _inventoryRepository;
 
         public ManageController()
         {
@@ -24,6 +30,8 @@ namespace Multishop.Web.Controllers
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _cartRepository = new CartRepository(new Data.DAL.Context.ApplicationDbContext());
+            _inventoryRepository = new InventoryRepository(new Data.DAL.Context.ApplicationDbContext());
         }
 
         public ApplicationSignInManager SignInManager
@@ -48,6 +56,19 @@ namespace Multishop.Web.Controllers
             {
                 _userManager = value;
             }
+        }
+
+        //TODO: Change Cart method localization to own controller
+        // GET: /Account/Cart
+        [Route("Account/Cart")]
+        public ActionResult ShowCart()
+        {
+            var user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            //string cartId = user.Id;
+            Cart cart = user.Cart;
+            IEnumerable <OrderProduct> orderedProducts = cart.OrderProducts;
+
+            return View(orderedProducts.ToList());
         }
 
         //

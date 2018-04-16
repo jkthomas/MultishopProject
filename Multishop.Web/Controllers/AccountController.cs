@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -19,10 +20,10 @@ namespace Multishop.Web.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private IRepository<Cart> _cartRepository;
-        private IRepository<Inventory> _inventoryRepository;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IManagementRepository<Cart> _cartRepository;
+        private IManagementRepository<Inventory> _inventoryRepository;
 
         public AccountController()
         {

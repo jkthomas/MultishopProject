@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Multishop.Data.DAL.Services.Repository
 {
-    public class CartRepository : IRepository<Cart>
+    public class CartRepository : IManagementRepository<Cart>
     {
         private ApplicationDbContext _dbContext;
 
@@ -16,13 +16,13 @@ namespace Multishop.Data.DAL.Services.Repository
         {
             this._dbContext = dbContext;
         }
-        public void Delete(int cartId)
+        public void Delete(string cartId)
         {
             Cart cart = _dbContext.Carts.Find(cartId);
             _dbContext.Carts.Remove(cart);
         }
 
-        public Cart GetDetails(int? cartId)
+        public Cart GetDetails(string cartId)
         {
             return _dbContext.Carts.Find(cartId);
         }

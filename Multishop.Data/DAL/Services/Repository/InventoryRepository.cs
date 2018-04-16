@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Multishop.Data.DAL.Services.Repository
 {
-    public class InventoryRepository : IRepository<Inventory>
+    public class InventoryRepository : IManagementRepository<Inventory>
     {
         private ApplicationDbContext _dbContext;
 
@@ -16,13 +16,13 @@ namespace Multishop.Data.DAL.Services.Repository
         {
             this._dbContext = dbContext;
         }
-        public void Delete(int inventoryId)
+        public void Delete(string inventoryId)
         {
             Inventory inventory = _dbContext.Inventories.Find(inventoryId);
             _dbContext.Inventories.Remove(inventory);
         }
 
-        public Inventory GetDetails(int? inventoryId)
+        public Inventory GetDetails(string inventoryId)
         {
             return _dbContext.Inventories.Find(inventoryId);
         }

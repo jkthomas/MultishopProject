@@ -7,6 +7,10 @@
 {
     <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
 }
+@if (TempData["Error"] != null)
+{
+    <p class="alert alert-danger" id="successMessage">@TempData["Error"]</p>
+}
 
 <h2>Index</h2>
 @if (Model.IsAdmin)

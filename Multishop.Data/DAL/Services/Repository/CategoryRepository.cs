@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Multishop.Data.DAL.Services.Repository
 {
-    public class CategoryRepository : IRepository<Category>
+    public class CategoryRepository : IProductionRepository<Category>
     {
         private ApplicationDbContext _dbContext;
 
