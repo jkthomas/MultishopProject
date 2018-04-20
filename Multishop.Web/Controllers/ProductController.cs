@@ -175,23 +175,23 @@ namespace Multishop.Web.Controllers
 
             user.Balance -= product.UnitPrice;
             OrderProduct orderProduct = _orderProductRepository.GetEntities().FirstOrDefault(p => p.ProductId == product.ProductId);
-            if (orderProduct.Equals(null))
+            try
+            {
+                orderProduct.Quantity += 1;
+                _orderProductRepository.Update(orderProduct);
+                _orderProductRepository.Save();
+            } catch (NullReferenceException e)
             {
                 orderProduct = new OrderProduct()
                 {
-                    CartId = user.Cart.CartId,
+                    UserId = user.Id,
                     ProductId = product.ProductId,
                     Quantity = 1
                 };
                 _orderProductRepository.Insert(orderProduct);
                 _orderProductRepository.Save();
             }
-            else
-            {
-                orderProduct.Quantity += 1;
-                _orderProductRepository.Update(orderProduct);
-                _orderProductRepository.Save();
-            }
+
             TempData["Success"] = "Bought successfully!";
             return RedirectToAction("Index");
         }

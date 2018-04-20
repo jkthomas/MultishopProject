@@ -13,8 +13,8 @@ namespace Multishop.Entities.Accounts
 {
     public class ApplicationUser : IdentityUser
     {
-        public virtual Cart Cart { get; set; }
-        public virtual Inventory Inventory { get; set; }
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
+        public virtual ICollection<StoredProduct> StoredProducts { get; set; }
         public decimal Balance { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

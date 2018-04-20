@@ -13,14 +13,14 @@ namespace Multishop.Entities.ShopEntities
     {
         [Key]
         public int StoredProductId { get; set; }
-        public string InventoryId { get; set; }
+        public string UserId { get; set; }
         public int ProductId { get; set; }
         public int Quantity { get; set; }
 
 
 
-        [ForeignKey("InventoryId")]
-        public virtual Inventory Inventory { get; set; }
+        [ForeignKey("UserId")]
+        public virtual ApplicationUser User { get; set; }
         [ForeignKey("ProductId")]
         public virtual Product Product { get; set; }
     }

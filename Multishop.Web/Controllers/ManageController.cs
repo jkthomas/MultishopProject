@@ -19,8 +19,8 @@ namespace Multishop.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private IManagementRepository<Cart> _cartRepository;
-        private IManagementRepository<Inventory> _inventoryRepository;
+        private IProductionRepository<OrderProduct> _orderProductRepository;
+        private IProductionRepository<StoredProduct> _storedProductRepository;
 
         public ManageController()
         {
@@ -30,8 +30,8 @@ namespace Multishop.Web.Controllers
         {
             UserManager = userManager;
             SignInManager = signInManager;
-            _cartRepository = new CartRepository(new Data.DAL.Context.ApplicationDbContext());
-            _inventoryRepository = new InventoryRepository(new Data.DAL.Context.ApplicationDbContext());
+            //_orderProductRepository = new OrderProductRepository(new Data.DAL.Context.ApplicationDbContext());
+            //_storedProductRepository = new StoredProductRepository(new Data.DAL.Context.ApplicationDbContext());
         }
 
         public ApplicationSignInManager SignInManager
@@ -58,15 +58,13 @@ namespace Multishop.Web.Controllers
             }
         }
 
-        //TODO: Change Cart method localization to own controller
-        // GET: /Account/Cart
-        [Route("Account/Cart")]
-        public ActionResult ShowCart()
+        //TODO: new ApplicationDbContext causes new OrderProduct not to load. Fix it
+        // GET: /Manage/Cart
+        public ActionResult Cart()
         {
+            _orderProductRepository = new OrderProductRepository(new Data.DAL.Context.ApplicationDbContext());
             var user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-            //string cartId = user.Id;
-            Cart cart = user.Cart;
-            IEnumerable <OrderProduct> orderedProducts = cart.OrderProducts;
+            IEnumerable<OrderProduct> orderedProducts = _orderProductRepository.GetEntities().Where(p => p.UserId == user.Id);
 
             return View(orderedProducts.ToList());
         }

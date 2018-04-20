@@ -24,11 +24,10 @@ namespace Multishop.Data.DAL.Context
             return new ApplicationDbContext();
         }
 
-        public DbSet<Cart> Carts { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
+        public DbSet<StoredProduct> StoredProducts { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Inventory> Inventories { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

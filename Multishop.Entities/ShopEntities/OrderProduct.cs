@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Multishop.Entities.Accounts;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,14 +13,14 @@ namespace Multishop.Entities.ShopEntities
     {
         [Key]
         public int OrderProductId { get; set; }
-        public string CartId { get; set; }
+        public string UserId { get; set; }
         public int ProductId { get; set; }
         public int Quantity { get; set; }
 
 
 
-        [ForeignKey("CartId")]
-        public virtual Cart Cart { get; set; }
+        [ForeignKey("UserId")]
+        public virtual ApplicationUser User { get; set; }
         [ForeignKey("ProductId")]
         public virtual Product Product { get; set; }
     }

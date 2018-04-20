@@ -1,5 +1,5 @@
 ﻿using Multishop.Data.DAL.Context;
-using Multishop.Entities.Accounts;
+using Multishop.Entities.ShopEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,33 +8,34 @@ using System.Threading.Tasks;
 
 namespace Multishop.Data.DAL.Services.Repository
 {
-    public class InventoryRepository : IManagementRepository<Inventory>
+    public class StoredProductRepository : IProductionRepository<StoredProduct>
     {
         private ApplicationDbContext _dbContext;
 
-        public InventoryRepository(ApplicationDbContext dbContext)
+        public StoredProductRepository(ApplicationDbContext dbContext)
         {
             this._dbContext = dbContext;
         }
-        public void Delete(string inventoryId)
+
+        public void Delete(int storedProductId)
         {
-            Inventory inventory = _dbContext.Inventories.Find(inventoryId);
-            _dbContext.Inventories.Remove(inventory);
+            StoredProduct storedProduct = _dbContext.StoredProducts.Find(storedProductId);
+            _dbContext.StoredProducts.Remove(storedProduct);
         }
 
-        public Inventory GetDetails(string inventoryId)
+        public StoredProduct GetDetails(int? storedProductId)
         {
-            return _dbContext.Inventories.Find(inventoryId);
+            return _dbContext.StoredProducts.Find(storedProductId);
         }
 
-        public IEnumerable<Inventory> GetEntities()
+        public IEnumerable<StoredProduct> GetEntities()
         {
-            return _dbContext.Inventories.ToList();
+            return _dbContext.StoredProducts.ToList();
         }
 
-        public void Insert(Inventory inventory)
+        public void Insert(StoredProduct storedProduct)
         {
-            _dbContext.Inventories.Add(inventory);
+            _dbContext.StoredProducts.Add(storedProduct);
         }
 
         public void Save()
@@ -42,13 +43,13 @@ namespace Multishop.Data.DAL.Services.Repository
             _dbContext.SaveChanges();
         }
 
-        public void Update(Inventory inventory)
+        public void Update(StoredProduct storedProduct)
         {
-            _dbContext.Entry(inventory).State = System.Data.Entity.EntityState.Modified;
+            _dbContext.Entry(storedProduct).State = System.Data.Entity.EntityState.Modified;
         }
 
         #region IDisposable Support
-        private bool disposedValue = false; // To detect redundant calls
+        private bool disposedValue = false;
 
         protected virtual void Dispose(bool disposing)
         {
@@ -58,7 +59,6 @@ namespace Multishop.Data.DAL.Services.Repository
                 {
                     _dbContext.Dispose();
                 }
-
                 disposedValue = true;
             }
         }

@@ -54,12 +54,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\Context\ApplicationDbContext.cs" />
-    <Compile Include="DAL\Services\Repository\CartRepository.cs" />
     <Compile Include="DAL\Services\Repository\CategoryRepository.cs" />
-    <Compile Include="DAL\Services\Repository\InventoryRepository.cs" />
     <Compile Include="DAL\Services\Repository\IRepository.cs" />
     <Compile Include="DAL\Services\Repository\OrderProductRepository.cs" />
     <Compile Include="DAL\Services\Repository\ProductRepository.cs" />
+    <Compile Include="DAL\Services\Repository\StoredProductRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
