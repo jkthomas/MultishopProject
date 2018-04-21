@@ -26,7 +26,7 @@
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
-                @Html.ActionLink("Sell", "Sell")
+                @Html.ActionLink("Return item", "Return", new { id = item.OrderProductId })
             </td>
         </tr>
     }

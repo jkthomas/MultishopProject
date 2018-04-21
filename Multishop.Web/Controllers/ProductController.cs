@@ -172,25 +172,10 @@ namespace Multishop.Web.Controllers
                 TempData["Error"] = "Insufficient credits!";
                 return RedirectToAction("Index");
             }
-
             user.Balance -= product.UnitPrice;
-            OrderProduct orderProduct = _orderProductRepository.GetEntities().FirstOrDefault(p => p.ProductId == product.ProductId);
-            try
-            {
-                orderProduct.Quantity += 1;
-                _orderProductRepository.Update(orderProduct);
-                _orderProductRepository.Save();
-            } catch (NullReferenceException e)
-            {
-                orderProduct = new OrderProduct()
-                {
-                    UserId = user.Id,
-                    ProductId = product.ProductId,
-                    Quantity = 1
-                };
-                _orderProductRepository.Insert(orderProduct);
-                _orderProductRepository.Save();
-            }
+            var controller = DependencyResolver.Current.GetService<CartController>();
+            controller.ControllerContext = new ControllerContext(this.Request.RequestContext, controller);
+            controller.Add(product);
 
             TempData["Success"] = "Bought successfully!";
             return RedirectToAction("Index");

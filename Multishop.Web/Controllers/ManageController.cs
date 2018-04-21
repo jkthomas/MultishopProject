@@ -19,12 +19,8 @@ namespace Multishop.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private IProductionRepository<OrderProduct> _orderProductRepository;
-        private IProductionRepository<StoredProduct> _storedProductRepository;
 
-        public ManageController()
-        {
-        }
+        public ManageController() { }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
@@ -40,9 +36,9 @@ namespace Multishop.Web.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -56,17 +52,6 @@ namespace Multishop.Web.Controllers
             {
                 _userManager = value;
             }
-        }
-
-        //TODO: new ApplicationDbContext causes new OrderProduct not to load. Fix it
-        // GET: /Manage/Cart
-        public ActionResult Cart()
-        {
-            _orderProductRepository = new OrderProductRepository(new Data.DAL.Context.ApplicationDbContext());
-            var user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-            IEnumerable<OrderProduct> orderedProducts = _orderProductRepository.GetEntities().Where(p => p.UserId == user.Id);
-
-            return View(orderedProducts.ToList());
         }
 
         //
@@ -92,7 +77,7 @@ namespace Multishop.Web.Controllers
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
                 UserRoles = await UserManager.GetRolesAsync(userId),
                 Balance = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(userId).Balance
-        };
+            };
             return View(model);
         }
 
@@ -354,7 +339,7 @@ namespace Multishop.Web.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -405,6 +390,6 @@ namespace Multishop.Web.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }
