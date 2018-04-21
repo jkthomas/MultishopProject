@@ -156,6 +156,7 @@ namespace Multishop.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        //TODO: Learn more about DependencyResolver
         // GET: Product/Buy/5
         [Authorize]
         public ActionResult Buy(int? id)
