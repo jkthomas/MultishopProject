@@ -4,3 +4,13 @@ D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Service\obj\Debug\M
 D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Service\obj\Debug\Multishop.Service.csproj.CoreCompileInputs.cache
 D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Service\obj\Debug\Multishop.Service.dll
 D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Service\obj\Debug\Multishop.Service.pdb
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Service\bin\Debug\Multishop.Entities.dll
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Service\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Service\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Service\bin\Debug\EntityFramework.dll
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Service\bin\Debug\Multishop.Entities.pdb
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Service\bin\Debug\Multishop.Entities.dll.config
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Service\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Service\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Service\bin\Debug\EntityFramework.xml
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Service\obj\Debug\Multishop.Service.csproj.CopyComplete

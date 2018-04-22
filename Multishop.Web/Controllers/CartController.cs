@@ -3,6 +3,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Multishop.Data.DAL.Services.Repository;
 using Multishop.Entities.Accounts;
 using Multishop.Entities.ShopEntities;
+using Multishop.Service.Operations;
+using Multishop.Web.Models.CartViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,9 +42,14 @@ namespace Multishop.Web.Controllers
         public ActionResult Index()
         {
             CurrentUser = UserManager.FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-            IEnumerable<OrderProduct> orderedProducts = _orderProductRepository.GetEntities().Where(p => p.UserId == this.CurrentUser.Id);
+            List<OrderProduct> orderedProducts = _orderProductRepository.GetEntities().Where(p => p.UserId == this.CurrentUser.Id).ToList();
+            CartViewModel model = new CartViewModel()
+            {
+                OrderProducts = orderedProducts,
+                Price = BalanceOperations.GetPrice(orderedProducts)
+            };
 
-            return View(orderedProducts.ToList());
+            return View(model);
         }
 
         // POST: Cart/Add
@@ -109,6 +116,13 @@ namespace Multishop.Web.Controllers
             CurrentUser = UserManager.FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
             List<OrderProduct> orderProducts = _orderProductRepository.GetEntities()
                 .Where(p => p.UserId == this.CurrentUser.Id).ToList();
+            if (!BalanceOperations.CanBuy(orderProducts, CurrentUser.Balance))
+            {
+                TempData["Error"] = "Insufficient credits!";
+                return RedirectToAction("Index");
+            }
+            CurrentUser.Balance -= BalanceOperations.GetPrice(orderProducts);
+            UserManager.Update(CurrentUser);
 
             var inventoryController = DependencyResolver.Current.GetService<InventoryController>();
             inventoryController.ControllerContext = new ControllerContext(this.Request.RequestContext, inventoryController);

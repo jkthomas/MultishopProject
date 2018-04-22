@@ -166,14 +166,7 @@ namespace Multishop.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-
             Product product = _productRepository.GetDetails(id);
-            if (product.UnitPrice > user.Balance)
-            {
-                TempData["Error"] = "Insufficient credits!";
-                return RedirectToAction("Index");
-            }
-            user.Balance -= product.UnitPrice;
             var cartController = DependencyResolver.Current.GetService<CartController>();
             cartController.ControllerContext = new ControllerContext(this.Request.RequestContext, cartController);
             cartController.Add(product);

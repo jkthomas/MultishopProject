@@ -124,3 +124,5 @@ D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Web\bin\Microsoft.A
 D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Web\obj\Debug\Multishop.Web.csproj.CopyComplete
 D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Web\obj\Debug\Multishop.Web.dll
 D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Web\obj\Debug\Multishop.Web.pdb
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Web\bin\Multishop.Service.dll
+D:\Aplikacje\VisualStudioProjects\MultishopProject\Multishop.Web\bin\Multishop.Service.pdb

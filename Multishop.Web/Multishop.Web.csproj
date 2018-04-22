@@ -201,6 +201,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BalanceViewModel.cs" />
+    <Compile Include="Models\CartViewModels\CartViewModel.cs" />
     <Compile Include="Models\CartViewModels\ProductIndexViewModel.cs" />
     <Compile Include="Models\CartViewModels\ProductViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -305,6 +306,13 @@
       <Project>{3f42e116-c337-44a4-90c5-4cbc8f7ffddb}</Project>
       <Name>Multishop.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Multishop.Service\Multishop.Service.csproj">
+      <Project>{145a3522-234f-47ae-9b1b-8cdd2e36bc42}</Project>
+      <Name>Multishop.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
