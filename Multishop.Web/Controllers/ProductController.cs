@@ -174,9 +174,9 @@ namespace Multishop.Web.Controllers
                 return RedirectToAction("Index");
             }
             user.Balance -= product.UnitPrice;
-            var controller = DependencyResolver.Current.GetService<CartController>();
-            controller.ControllerContext = new ControllerContext(this.Request.RequestContext, controller);
-            controller.Add(product);
+            var cartController = DependencyResolver.Current.GetService<CartController>();
+            cartController.ControllerContext = new ControllerContext(this.Request.RequestContext, cartController);
+            cartController.Add(product);
 
             TempData["Success"] = "Bought successfully!";
             return RedirectToAction("Index");

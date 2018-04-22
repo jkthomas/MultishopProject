@@ -94,5 +94,35 @@ namespace Multishop.Web.Controllers
 
             return RedirectToAction("Index");
         }
+
+        //GET: Cart/Checkout
+        public ActionResult Checkout()
+        {
+            return View();
+        }
+
+        //POST: Cart/Checkout
+        [HttpPost, ActionName("Checkout")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CheckoutConfirmed()
+        {
+            CurrentUser = UserManager.FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            List<OrderProduct> orderProducts = _orderProductRepository.GetEntities()
+                .Where(p => p.UserId == this.CurrentUser.Id).ToList();
+
+            var inventoryController = DependencyResolver.Current.GetService<InventoryController>();
+            inventoryController.ControllerContext = new ControllerContext(this.Request.RequestContext, inventoryController);
+
+            inventoryController.Add(orderProducts);
+
+            foreach(OrderProduct product in orderProducts)
+            {
+                _orderProductRepository.Delete(product.OrderProductId);
+            }
+            _orderProductRepository.Save();
+            
+
+            return RedirectToAction("Index", "Inventory");
+        }
     }
 }
